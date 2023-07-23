@@ -28,5 +28,5 @@ app.use("/api", orderRouter);
 app.use("/api", orderDetailRouter);
 
 // server
-mongoose.connect("mongodb://127.0.0.1:27017/we17307");
+mongoose.connect("mongodb://127.0.0.1:27017/tea_house");
 export const viteNodeApp = app;

@@ -36,13 +36,15 @@ export const getAll = async (req, res) => {
 // lấy tất cả hóa đơn của 1 user ra
 export const getByUser = async (req, res) => {
     try {
-        const user = await User.find({ userId: req.params.id })
+        const user = await User.findById(req.params.id)
+        // console.log(user);
         if (!user) {
             return res.status(404).json({
                 message: "Order not found",
             });
         }
         const orders = await Order.find({ userId: user._id })
+        // console.log(orders);
         return res.status(200).json({
             message: "Order found successfully",
             data: orders,

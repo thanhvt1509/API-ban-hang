@@ -6,18 +6,21 @@ import { orderDetailSchema } from "../schemas/order_detail";
 // lấy tất cả những chi tiết hóa đơn của 1 hóa đơn ra
 export const getOrderDetail = async (req, res) => {
     try {
-        const orderDetail = await OrderDetail.find({ orderId: req.params.id })
+        const orderDetail = await OrderDetail.find({ orderId: req.params.id }).populate(
+            "productId"
+        );
         if (!orderDetail) {
             return res.status(404).json({
                 message: "orderDetail not found",
             });
         }
-        const products = await Product.find({ _id: orderDetail.productId })
+        // const [{ productId }] = orderDetail
+        // const products = await Product.findOne({ _id: productId })
+        // console.log(products);
         return res.status(200).json({
             message: "Order found successfully",
             data: {
-                ...orderDetail,
-                ...products
+                orderDetail,
             },
         });
     } catch (error) {
