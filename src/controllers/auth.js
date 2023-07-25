@@ -26,7 +26,7 @@ export const signup = async (req, res) => {
     // Thêm tài khoản vào db
     const user = await User.create({ ...req.body, password: hashedPassword });
 
-    const token = jwt.sign({ id: user._id }, "banThayDat", { expiresIn: "1d" });
+    const token = jwt.sign({ id: user._id }, "teaHouse", { expiresIn: "1d" });
 
     user.password = undefined;
     return res.status(200).json({
@@ -66,7 +66,7 @@ export const signin = async (req, res) => {
       });
     }
 
-    const token = jwt.sign({ id: user._id }, "banThayDat", { expiresIn: "1d" });
+    const token = jwt.sign({ id: user._id }, "teaHouse", { expiresIn: "1d" });
 
     user.password = undefined;
     return res.status(200).json({
